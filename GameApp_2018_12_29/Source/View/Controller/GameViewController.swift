@@ -12,10 +12,16 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    var presenter: Presenter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = Presenter()
+        
         if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
             if let view = self.view as! SKView? {
+                scene.presenter = presenter
                 view.presentScene(scene)
                 
             }

@@ -26,7 +26,8 @@ class Player: SKSpriteNode {
     }
     
     init() {
-        super.init(texture: nil, color: .clear, size: Physics.initialSize)
+        let texture = SKTexture(imageNamed: "player_start")
+        super.init(texture: texture, color: .clear, size: Physics.initialSize)
     }
     
     required init?(coder aDecoder: NSCoder) {
