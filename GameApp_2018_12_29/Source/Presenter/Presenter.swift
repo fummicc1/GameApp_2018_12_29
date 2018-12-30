@@ -9,23 +9,23 @@
 import Foundation
 import SpriteKit
 
-protocol PresentationLogic {
-    func update<T: SKSpriteNode>(object: inout T)
+protocol PresentationViewer: class {
+    func update<Node: SKSpriteNode>(objects: inout [Node])
     func animate(object: inout SKNode, animation: SKAction)
 }
 
-class Presenter: PresentationLogic {
+class Presenter: PresentationViewer {
     
     // Reference to the View (weak to avoid retain cycle).
-    weak var view: GameViewController?
+    weak var viewController: GameViewController?
     
     // Reference to the Interactor's interface.
-    var interactor: WorkerInteractor?
+    var interactor: FundamentalUseCase?
     
     // Reference to the Router
     var router: Router?
     
-    func update<T: SKSpriteNode>(object: inout T) {
+    func update<Node>(objects: inout [Node]) where Node : SKSpriteNode {
     }
     
     func animate(object: inout SKNode, animation: SKAction) {

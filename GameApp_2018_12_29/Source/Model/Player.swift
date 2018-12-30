@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class Player: SKSpriteNode {
-    var hitPoint: Int = 0
+    var hitPoint: Int = 100
     var score: Int = 0
     
     struct Animation {

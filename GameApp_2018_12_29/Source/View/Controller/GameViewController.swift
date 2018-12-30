@@ -23,7 +23,6 @@ class GameViewController: UIViewController {
             if let view = self.view as! SKView? {
                 scene.presenter = presenter
                 view.presentScene(scene)
-                
             }
         }
     }

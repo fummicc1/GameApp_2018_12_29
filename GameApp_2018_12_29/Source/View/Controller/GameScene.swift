@@ -12,7 +12,10 @@ import GameplayKit
 class GameScene: SKScene {
     var presenter: Presenter?
     
+    var player: Player!
+    
     override func didMove(to view: SKView) {
+        self.player = Player()
         self.presenter = Presenter()
     }
     
