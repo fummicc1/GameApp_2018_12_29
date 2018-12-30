@@ -20,7 +20,7 @@ class Presenter: PresentationLogic {
     weak var view: GameViewController?
     
     // Reference to the Interactor's interface.
-    var interactor: Interactor?
+    var interactor: WorkerInteractor?
     
     // Reference to the Router
     var router: Router?

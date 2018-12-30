@@ -11,4 +11,13 @@ import GameplayKit
 
 class GameScene: SKScene {
     var presenter: Presenter?
+    
+    override func didMove(to view: SKView) {
+        self.presenter = Presenter()
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+    }
+    
 }
