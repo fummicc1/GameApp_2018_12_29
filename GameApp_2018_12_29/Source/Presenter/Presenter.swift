@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 protocol PresentationViewer: class {
-    func update<Node: SKSpriteNode>(objects: inout [Node])
+    func update<Node: SKSpriteNode>(object: inout Node)
     func animate(object: inout SKNode, animation: SKAction)
 }
 
@@ -20,15 +20,31 @@ class Presenter: PresentationViewer {
     weak var viewController: GameViewController?
     
     // Reference to the Interactor's interface.
-    var interactor: FundamentalUseCase?
+    private var interactor: PlayerInteractor?
     
     // Reference to the Router
-    var router: Router?
+    private var router: RouteToScene?
     
-    func update<Node>(objects: inout [Node]) where Node : SKSpriteNode {
+    init(interactor: PlayerInteractor) {
+        self.interactor = interactor
+    }
+    
+    func update<Node>(object: inout Node) where Node : SKSpriteNode {
+        if object is Player {
+            let player = (object as! Player)
+            interactor?.move(player: player)
+        }
     }
     
     func animate(object: inout SKNode, animation: SKAction) {
         object.run(animation)
     }
+    
+    func jump() {
+    }
+    
+    func gameClear() {
+        
+    }
+    
 }

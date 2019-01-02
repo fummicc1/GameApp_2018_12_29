@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-protocol FundamentalUseCaseProtocol {
+protocol ActionProtocol {
     
     func damagaed(player: inout Player)
     
@@ -19,10 +19,13 @@ protocol FundamentalUseCaseProtocol {
     
     func move(from: inout CGPoint, dx: CGFloat)
     
+    func animate(_ animation: SKAction, object: inout SKSpriteNode)
+    
+    func animate(object: SKSpriteNode, action: @escaping (() -> ()))
+    
 }
 
-/// Validationをしないで、ビジネスロジック・UseCaseを書いた。
-class FundamentalUseCase: FundamentalUseCaseProtocol {
+class PlayerWorker: ActionProtocol {
     
     func damagaed(player: inout Player) {
         player.hitPoint -= 1
@@ -38,6 +41,16 @@ class FundamentalUseCase: FundamentalUseCaseProtocol {
     
     func move(from: inout CGPoint, dx: CGFloat) {
         from.x += dx
+    }
+    
+    func animate(_ animation: SKAction, object: inout SKSpriteNode) {
+        object.run(animation)
+    }
+    
+    func animate(object: SKSpriteNode, action: @escaping (() -> ())) {
+        object.run(SKAction.run {
+            action()
+        })
     }
 }
 

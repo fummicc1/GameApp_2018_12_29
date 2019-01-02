@@ -16,11 +16,11 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.player = Player()
-        self.presenter = Presenter()
     }
     
     override func update(_ currentTime: TimeInterval) {
-        
+        presenter?.update(object: &player)
     }
+    
     
 }

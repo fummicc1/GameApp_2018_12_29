@@ -17,8 +17,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = Presenter()
-        
         if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
             if let view = self.view as! SKView? {
                 scene.presenter = presenter

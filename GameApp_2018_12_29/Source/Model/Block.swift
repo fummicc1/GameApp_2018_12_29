@@ -19,6 +19,7 @@ class Block: SKSpriteNode {
     init() {
         let texture = SKTexture(imageNamed: "block")
         super.init(texture: texture, color: .clear, size: Physics.initialSize)
+        self.physicsBody = SKPhysicsBody(texture: texture, size: Physics.initialSize)
     }
     
     required init?(coder aDecoder: NSCoder) {
