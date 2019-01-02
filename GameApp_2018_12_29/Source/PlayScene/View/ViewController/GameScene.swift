@@ -10,16 +10,13 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var presenter: Presenter?
     
-    var player: Player!
+    var router: Router<GameViewController>?
     
     override func didMove(to view: SKView) {
-        self.player = Player()
     }
     
     override func update(_ currentTime: TimeInterval) {
-        presenter?.update(object: &player)
     }
     
     

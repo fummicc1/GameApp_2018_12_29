@@ -12,16 +12,15 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
-    var presenter: Presenter?
+    var router: Router<GameViewController>?
+    var interactor: PlayerInteractor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        var skView = view as! SKView
         if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
-            if let view = self.view as! SKView? {
-                scene.presenter = presenter
-                view.presentScene(scene)
-            }
+            setup()
+            router?.route(scene: scene, view: &skView)
         }
     }
     
@@ -37,4 +36,16 @@ class GameViewController: UIViewController {
         return true
     }
     
+    private func setup() {
+        let vc = self
+        let interactor = PlayerInteractor()
+        let presenter = Presenter()
+        let router: Router<GameViewController> = Router()
+        vc.router = router
+        vc.interactor = interactor
+        router.viewController = vc
+        presenter.viewController = vc
+        interactor.presenter = presenter
+        router.dataStore = interactor
+    }    
 }

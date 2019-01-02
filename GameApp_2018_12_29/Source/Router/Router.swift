@@ -10,36 +10,32 @@ import Foundation
 import SpriteKit
 
 protocol RouteToScene {
-    func route<T: UIViewController>(to: String, storyBoard: String) -> T
+    func route(storyboard: String, viewController: String)
+    func route(scene: SKScene, view: inout SKView)
 }
 
-protocol DataPasser {
+protocol DataPassing {
     var dataStore: DataStore? { get set }
 }
 
-protocol DataReciever {
-    var dataStore: DataStore? { get }
-}
-
-struct DataStore {
+protocol DataStore {
     
+    var score: Int { get set }
+    var model: Model.ModelType { get set }
 }
 
-class Router<V: UIViewController>: RouteToScene, DataReciever {
+class Router<V: UIViewController>: RouteToScene, DataPassing {
     
     weak var viewController: V?
-    
     var dataStore: DataStore?
     
-    init(viewController: V) {
-        self.viewController = viewController
+    func route(storyboard: String, viewController: String) {
+        let nextViewController = UIStoryboard(name: storyboard, bundle: nil).instantiateViewController(withIdentifier: viewController) as! V
+        
     }
     
-    func route<T>(to: String, storyBoard: String) -> T where T: UIViewController {
-        let vc = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: to) as! T
-        
-        return vc
-        
+    func route(scene: SKScene, view: inout SKView) {
+        view.presentScene(scene)
     }
     
 }
